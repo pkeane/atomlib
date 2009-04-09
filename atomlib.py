@@ -121,15 +121,15 @@ class Atom:
 
     def getLinks(self):
         links = []
-        ln = {}
         for link in self.root.getiterator(ATOM_NS+'link'):
+            ln = {}
             ln['href'] = link.get('href')
             ln['rel'] = link.get('rel')
             ln['title'] = link.get('title')
             ln['type'] = link.get('type')
             ln['length'] = link.get('length')
             links.append(ln)
-            return links
+        return links
 
     def addCategory(self,term,scheme='',label='',text=''):
         category = self.addElement('category')
