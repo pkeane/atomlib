@@ -1,4 +1,7 @@
-from xml.etree import cElementTree as ET
+try:
+    from xml.etree import cElementTree as ET
+except ImportError:
+    from elementtree import ElementTree as ET
 import os
 import re
 import time
