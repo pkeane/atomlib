@@ -54,6 +54,25 @@ class Atom:
             elem.text = text
 
     @classmethod
+    def fromFile(self,filename):
+        fh = open(filename)
+        atom = ET.XML(fh.read())
+        if atom.tag == ATOM_NS + "feed":
+            return Feed(atom)
+        elif atom.tag == ATOM_NS + "entry":
+            return Entry(atom)
+        raise IOError("not an atom document")
+
+    @classmethod
+    def fromString(self,xml):
+        atom = ET.XML(xml)
+        if atom.tag == ATOM_NS + "feed":
+            return Feed(atom)
+        elif atom.tag == ATOM_NS + "entry":
+            return Entry(atom)
+        raise IOError("not an atom document")
+
+    @classmethod
     def retrieve(self,url,user='',passwd=''):
         h = httplib2.Http()
         if user and passwd:
